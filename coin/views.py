@@ -7,20 +7,20 @@ from coin.forms import CoinForm
 from coin.models import Coin
 
 
-class CoinCreateView(CreateView):
+class CoinCreateView(LoginRequiredMixin, CreateView):
     template_name = 'coin/create_coin.html'
     model = Coin
     form_class = CoinForm
     success_url = reverse_lazy('home_page')
 
 
-class CoinListView(ListView):
+class CoinListView(LoginRequiredMixin, ListView):
     template_name = 'coin/list_of_coins.html'
     model = Coin
     context_object_name = 'all_coins'
 
 
-class CoinDeleteView(DeleteView):
+class CoinDeleteView(LoginRequiredMixin, DeleteView):
     template_name = 'coin/delete_coin.html'
     model = Coin
     success_url = reverse_lazy('list-of-coins')
