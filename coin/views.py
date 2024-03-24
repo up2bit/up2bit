@@ -34,3 +34,9 @@ class CoinDeleteView(LoginRequiredMixin, DeleteView):
     template_name = 'coin/delete_coin.html'
     model = Coin
     success_url = reverse_lazy('list-of-coins')
+
+
+class ProfitableListView(LoginRequiredMixin, ListView):
+    template_name = 'profitable/profitable_coin.html'
+    model = Coin
+    context_object_name = 'all_coins'

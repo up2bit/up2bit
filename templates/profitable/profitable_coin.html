@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} Profitable Coin  {% endblock %}
+
+
+{% block content %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>Profile</th>
+                        <th>Name</th>
+                        <th>Price</th>
+                        <th>One Day Profitability</th>
+                        <th>One Week Profitability</th>
+                        <th>Active</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for coin in all_coins %}
+                        <tr>
+                            <td>
+                                {% if coin.profile %}
+                                    <img src="{{ coin.profile.url }}" width="60px" height="60px"/>
+                                {% else %}
+                                    <img src="{% static 'images/img_3.png' %}" width="60px" height="60px"/>
+                                {% endif %}
+                            </td>
+                            <td>{{ coin.name }}</td>
+                            <td>{{ coin.price }}</td>
+                            <td>{{ coin.one_day_profitability }}</td>
+                            <td>{{ coin.one_week_one_day_profitability }}</td>
+                            <td>
+                                {% if coin.active %}
+                                    Yes
+                                {% else %}
+                                    No
+                                {% endif %}
+                                <div class="dropdown">
+                                    <button class="btn btn-secondary dropdown-toggle" type="button"
+                                            data-bs-toggle="dropdown" aria-expanded="false">
+                                        More actions
+                                    </button>
+                                    <ul class="dropdown-menu">
+                                        <li><a class="dropdown-item" href="{% url 'delete-coin' coin.id %}">Delete</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </td>
+
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}
