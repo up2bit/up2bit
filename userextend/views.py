@@ -14,6 +14,8 @@ class UserCreateView(CreateView):
     success_url = reverse_lazy('login')
 
     def form_valid(self, form):
+        """It checks if the entered data is valid, saves it
+        and capitalize the first letter of the first name and last name."""
         if form.is_valid():
             new_user = form.save(commit=False)
             new_user.first_name = new_user.first_name.title()
@@ -22,3 +24,7 @@ class UserCreateView(CreateView):
 
         return redirect('login')
 
+
+def logout_view(request):
+    logout(request)
+    return redirect('login')
